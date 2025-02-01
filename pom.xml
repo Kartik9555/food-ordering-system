@@ -18,10 +18,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>order-service</module>
+        <module>common</module>
     </modules>
 
     <properties>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <lombok.version>1.18.36</lombok.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -52,11 +54,21 @@
                 <artifactId>order-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>common-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
