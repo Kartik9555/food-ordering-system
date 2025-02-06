@@ -46,6 +46,7 @@ public class KafkaConsumerConfig<K extends Serializable, V extends SpecificRecor
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
+    @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<K, V>> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<K, V> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
