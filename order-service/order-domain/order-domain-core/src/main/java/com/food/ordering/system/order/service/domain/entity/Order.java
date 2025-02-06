@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @Getter
 public class Order extends AggregateRoot<OrderId> {
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
     private final StreetAddress deliveryAddress;
