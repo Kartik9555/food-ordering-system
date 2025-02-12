@@ -53,7 +53,7 @@
               "name": "id",
               "type": {
                 "type": "string",
-                "logicalType": "uuid"
+                "logicalType": "long"
               }
             },
             {

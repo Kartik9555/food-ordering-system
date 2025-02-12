@@ -12,6 +12,7 @@ import org.springframework.kafka.support.SendResult;
 
 import java.io.Serializable;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiFunction;
 
 @Configuration
 @Slf4j
@@ -20,11 +21,11 @@ public class KafkaProducerImpl<K extends Serializable, V extends SpecificRecordB
     private final KafkaTemplate<K, V> kafkaTemplate;
 
     @Override
-    public void send(String topicName, K key, V message, CompletableFuture<SendResult<K, V>> callback) {
+    public void send(String topicName, K key, V message, BiFunction<SendResult<K, V>, Throwable, Void> callback) {
         log.info("Sending message={} to topic={}", message, topicName);
         try {
             CompletableFuture<SendResult<K, V>> future = kafkaTemplate.send(topicName, key, message);
-            //future.thenApplyAsync(callback);
+            future.handle(callback);
         } catch (Exception e) {
             log.error("Error on kafka producer with key: {}, message: {} and exception: {} ", key, message, e.getMessage());
             throw new KafkaProducerException("Error on kafka producer with key: " + key + ", message: " + message);
