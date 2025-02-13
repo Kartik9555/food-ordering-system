@@ -32,6 +32,13 @@
       }
     },
     {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
       "name": "orderApprovalStatus",
       "type": {
         "type": "enum",
