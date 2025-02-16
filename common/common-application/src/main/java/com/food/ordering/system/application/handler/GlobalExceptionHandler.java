@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {Exception.class})
+    @ExceptionHandler(value = {ValidationException.class})
     public ErrorDTO handleException(ValidationException exception) {
         String message = exception instanceof ConstraintViolationException ? extractViolationsFromException((ConstraintViolationException) exception) : exception.getMessage();
         log.error(message, exception);

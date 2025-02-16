@@ -19,7 +19,7 @@ CREATE TABLE "order".orders
     price numeric(10,2) NOT NULL,
     order_status order_status NOT NULL,
     failure_messages character varying COLLATE pg_catalog."default",
-    CONSTRAINT orders_pkey PRIMARY KEY (id);
+    CONSTRAINT orders_pkey PRIMARY KEY (id)
 );
 
 DROP TABLE IF EXISTS "order".order_items CASCADE;
@@ -32,7 +32,7 @@ CREATE TABLE "order".order_items
     price numeric(10,2) NOT NULL,
     quantity integer NOT NULL,
     sub_total numeric(10,2) NOT NULL,
-    CONSTRAINT order_items_pkey PRIMARY KEY (id);
+    CONSTRAINT order_items_pkey PRIMARY KEY (id)
 );
 
 ALTER TABLE "order".order_items
@@ -51,7 +51,7 @@ CREATE TABLE "order".order_address
     street character varying COLLATE pg_catalog."default" NOT NULL,
     postal_code character varying COLLATE pg_catalog."default" NOT NULL,
     city character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT order_address_pkey PRIMARY KEY (id, order_id);
+    CONSTRAINT order_address_pkey PRIMARY KEY (id, order_id)
 );
 
 ALTER TABLE "order".order_address

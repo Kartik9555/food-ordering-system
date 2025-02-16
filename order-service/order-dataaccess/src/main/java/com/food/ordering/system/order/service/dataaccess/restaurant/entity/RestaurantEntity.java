@@ -1,5 +1,6 @@
 package com.food.ordering.system.order.service.dataaccess.restaurant.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
@@ -16,9 +17,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @IdClass(RestaurantEntityId.class)
 @Table(name = "order_restaurant_m_view", schema = "restaurant")
+@Entity
 public class RestaurantEntity {
     @Id
-    private UUID id;
+    private UUID restaurantId;
     @Id
     private UUID productId;
     private String restaurantName;
@@ -29,11 +31,11 @@ public class RestaurantEntity {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof RestaurantEntity that)) return false;
-        return Objects.equals(id, that.id) && Objects.equals(productId, that.productId);
+        return Objects.equals(restaurantId, that.restaurantId) && Objects.equals(productId, that.productId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productId);
+        return Objects.hash(restaurantId, productId);
     }
 }
