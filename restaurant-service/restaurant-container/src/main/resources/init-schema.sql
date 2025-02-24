@@ -66,7 +66,7 @@ NOT VALID;
 
 DROP MATERIALIZED VIEW IF EXISTS "restaurant".order_restaurant_m_view;
 
-CREATE MATERIALIZED VIEW IF EXISTS "restaurant".order_restaurant_m_view
+CREATE MATERIALIZED VIEW "restaurant".order_restaurant_m_view
 TABLESPACE pg_default
 AS
   SELECT r.id as restaurant_id,
@@ -93,7 +93,7 @@ BEGIN
 END;
 ' LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS refresh_order_restaurant_m_view ON "restaurant".restaurant_products
+DROP trigger IF EXISTS refresh_order_restaurant_m_view ON "restaurant".restaurant_products;
 
 CREATE TRIGGER refresh_order_restaurant_m_view
 AFTER INSERT OR UPDATE OR DELETE OR TRUNCATE
