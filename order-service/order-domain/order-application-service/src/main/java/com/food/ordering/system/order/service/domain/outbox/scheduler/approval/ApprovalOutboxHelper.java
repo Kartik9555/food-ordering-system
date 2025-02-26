@@ -21,10 +21,8 @@ import static com.food.ordering.system.saga.order.SagaConstants.ORDER_SAGA_NAME;
 @RequiredArgsConstructor
 public class ApprovalOutboxHelper {
     private final ApprovalOutboxRepository approvalOutboxRepository;
-    private final RestaurantApp
 
     @Transactional(readOnly = true)
-
     public Optional<List<OrderApprovalOutboxMessage>> getApprovalOutboxMessageByOutboxStatusAndSagaStatus(
             OutboxStatus outboxStatus, SagaStatus... sagaStatus
     ) {
