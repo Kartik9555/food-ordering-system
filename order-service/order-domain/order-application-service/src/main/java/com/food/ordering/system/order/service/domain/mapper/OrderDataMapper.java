@@ -1,9 +1,6 @@
 package com.food.ordering.system.order.service.domain.mapper;
 
-import com.food.ordering.system.domain.valueobject.CustomerId;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.ProductId;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.food.ordering.system.domain.valueobject.*;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.dto.create.OrderAddress;
@@ -12,6 +9,11 @@ import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.OrderItem;
 import com.food.ordering.system.order.service.domain.entity.Product;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
+import com.food.ordering.system.order.service.domain.event.OrderCreatedEvent;
+import com.food.ordering.system.order.service.domain.event.OrderPaidEvent;
+import com.food.ordering.system.order.service.domain.outbox.model.approval.OrderApprovalEventPayload;
+import com.food.ordering.system.order.service.domain.outbox.model.approval.OrderApprovalEventProduct;
+import com.food.ordering.system.order.service.domain.outbox.model.payment.OrderPaymentEventPayload;
 import com.food.ordering.system.order.service.domain.valueobject.StreetAddress;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
@@ -60,6 +62,35 @@ public class OrderDataMapper {
                 .orderStatus(order.getOrderStatus())
                 .orderTrackingId(order.getTrackingId().getValue())
                 .failureMessages(order.getFailureMessages())
+                .build();
+    }
+
+    public OrderPaymentEventPayload orderCreatedEventToOrderPaymentEventPayload(OrderCreatedEvent orderCreatedEvent) {
+        return OrderPaymentEventPayload.builder()
+                .orderId(orderCreatedEvent.getOrder().getId().getValue().toString())
+                .price(orderCreatedEvent.getOrder().getPrice().getAmount())
+                .customerId(orderCreatedEvent.getOrder().getCustomerId().getValue().toString())
+                .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .createdAt(orderCreatedEvent.getCreatedAt())
+                .build();
+    }
+
+    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .products(orderPaidEvent.getOrder()
+                        .getItems()
+                        .stream()
+                        .map(orderItem -> OrderApprovalEventProduct.builder()
+                                .id(orderItem.getId().getValue().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build())
+                        .toList()
+                )
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                .createdAt(orderPaidEvent.getCreatedAt())
                 .build();
     }
 
