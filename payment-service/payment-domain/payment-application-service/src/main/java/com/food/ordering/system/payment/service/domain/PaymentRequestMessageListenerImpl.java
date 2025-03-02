@@ -30,6 +30,6 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
                 paymentEvent.getPayment().getOrderId().getValue(),
                 paymentEvent.getPayment().getOrderId().getValue()
         );
-        paymentEvent.fire();
+        //paymentEvent.fire();
     }
 }

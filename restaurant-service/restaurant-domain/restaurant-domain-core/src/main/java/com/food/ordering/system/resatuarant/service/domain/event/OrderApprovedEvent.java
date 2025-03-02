@@ -8,9 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class OrderApprovedEvent extends OrderApprovalEvent {
-
-    private final DomainEventPublisher<OrderApprovedEvent> orderApprovedEventDomainEventPublisher;
-
     public OrderApprovedEvent(
             OrderApproval orderApproval,
             RestaurantId restaurantId,
@@ -19,11 +16,5 @@ public class OrderApprovedEvent extends OrderApprovalEvent {
             DomainEventPublisher<OrderApprovedEvent> orderApprovedEventDomainEventPublisher
     ) {
         super(orderApproval, restaurantId, failureMessages, createdAt);
-        this.orderApprovedEventDomainEventPublisher = orderApprovedEventDomainEventPublisher;
-    }
-
-    @Override
-    public void fire() {
-        orderApprovedEventDomainEventPublisher.publish(this);
     }
 }
