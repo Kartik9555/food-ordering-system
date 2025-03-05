@@ -1,6 +1,5 @@
 package com.food.ordering.system.restaurant.service.domain;
 
-import com.food.ordering.system.resatuarant.service.domain.event.OrderApprovalEvent;
 import com.food.ordering.system.restaurant.service.domain.dto.RestaurantApprovalRequest;
 import com.food.ordering.system.restaurant.service.domain.ports.input.message.listener.RestaurantApprovalRequestMessageListener;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +15,6 @@ public class RestaurantApprovalRequestMessageListenerImpl implements RestaurantA
 
     @Override
     public void approveOrder(RestaurantApprovalRequest restaurantApprovalRequest) {
-        OrderApprovalEvent orderApprovalEvent = restaurantApprovalRequestHelper.persistOrderApproval(restaurantApprovalRequest);
-        //orderApprovalEvent.fire();
-
+        restaurantApprovalRequestHelper.persistOrderApproval(restaurantApprovalRequest);
     }
 }
