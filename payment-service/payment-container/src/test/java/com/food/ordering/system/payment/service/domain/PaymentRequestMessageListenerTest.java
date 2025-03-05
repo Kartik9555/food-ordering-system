@@ -105,6 +105,7 @@ public class PaymentRequestMessageListenerTest {
                 .paymentOrderStatus(PaymentOrderStatus.PENDING)
                 .customerId(CUSTOMER_ID)
                 .createdAt(Instant.now())
+                .price(PRICE)
                 .build();
     }
 }
