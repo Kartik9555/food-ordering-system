@@ -41,3 +41,4 @@ build/
 ### infrasture docker volumes
 /infrastructure/docker-compose/volumes/
 /infrastructure/kafka/kafka-model/src/main/java/com/food/ordering/system/kafka/
+/.idea/inspectionProfiles/Project_Default.xml
