@@ -24,23 +24,23 @@ import java.util.UUID;
 
 @Component
 public class OrderDataMapper {
-    public Restaurant createOrderCommandToRestaurant(CreateOrderCommand createOrderCommand){
+    public Restaurant createOrderCommandToRestaurant(CreateOrderCommand createOrderCommand) {
         return Restaurant.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
                 .products(createOrderCommand.getItems()
                         .stream()
                         .map(orderItem -> new Product(
-                                new ProductId(
-                                        orderItem.getProductId()
+                                        new ProductId(
+                                                orderItem.getProductId()
+                                        )
                                 )
-                        )
                         )
                         .toList()
                 )
                 .build();
     }
 
-    public Order createOrderCommandToOrder(CreateOrderCommand createOrderCommand){
+    public Order createOrderCommandToOrder(CreateOrderCommand createOrderCommand) {
         return Order.builder()
                 .customerId(new CustomerId(createOrderCommand.getCustomerId()))
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
