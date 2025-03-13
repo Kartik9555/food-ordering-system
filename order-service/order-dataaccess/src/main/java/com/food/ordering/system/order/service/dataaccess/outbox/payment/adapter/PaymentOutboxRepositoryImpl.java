@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class PaymentOutboxRepositoryImpl implements PaymentOutboxRepository {
                         .orElseThrow(() -> new PaymentOutboxNotFoundException("Payment outbox object could not be found for saga type " + type))
                         .stream()
                         .map(paymentOutboxDataAccessMapper::paymentOutboxEntityToOrderPaymentOutboxMessage)
-                        .toList()
+                        .collect(Collectors.toList())
         );
     }
 

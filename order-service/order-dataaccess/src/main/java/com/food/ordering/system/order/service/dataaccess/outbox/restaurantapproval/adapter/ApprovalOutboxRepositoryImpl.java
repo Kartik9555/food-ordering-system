@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class ApprovalOutboxRepositoryImpl implements ApprovalOutboxRepository {
                         .orElseThrow(() -> new ApprovalOutboxNotFoundException("Approval outbox object could not be found for saga type " + type))
                         .stream()
                         .map(approvalOutboxDataAccessMapper::approvalOutboxEntityToOrderApprovalOutboxMessage)
-                        .toList()
+                        .collect(Collectors.toList())
         );
     }
 

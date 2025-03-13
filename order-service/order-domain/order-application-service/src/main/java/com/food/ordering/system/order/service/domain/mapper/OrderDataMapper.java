@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderDataMapper {
@@ -33,7 +34,7 @@ public class OrderDataMapper {
                                         )
                                 )
                         )
-                        .toList()
+                        .collect(Collectors.toList())
                 )
                 .build();
     }
@@ -77,18 +78,16 @@ public class OrderDataMapper {
     public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
         return OrderApprovalEventPayload.builder()
                 .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
-                .price(orderPaidEvent.getOrder().getPrice().getAmount())
                 .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
                 .products(orderPaidEvent.getOrder()
                         .getItems()
                         .stream()
                         .map(orderItem -> OrderApprovalEventProduct.builder()
-                                .id(orderItem.getId().getValue().toString())
+                                .id(orderItem.getProduct().getId().getValue().toString())
                                 .quantity(orderItem.getQuantity())
-                                .build())
-                        .toList()
-                )
-                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                                .build()).collect(Collectors.toList()))
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
                 .createdAt(orderPaidEvent.getCreatedAt())
                 .build();
     }
@@ -121,7 +120,7 @@ public class OrderDataMapper {
                         .subTotal(new Money(orderItem.getSubTotal()))
                         .build()
                 )
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private StreetAddress orderAddressToStreetAddress(@NotNull OrderAddress address) {

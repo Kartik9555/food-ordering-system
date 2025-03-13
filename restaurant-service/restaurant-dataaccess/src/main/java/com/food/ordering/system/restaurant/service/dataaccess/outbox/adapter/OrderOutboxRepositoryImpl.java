@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -36,7 +37,7 @@ public class OrderOutboxRepositoryImpl implements OrderOutboxRepository {
                         .orElseThrow(() -> new OrderOutboxNotFoundException("Approval outbox object cannot be found for saga type " + sagaType))
                         .stream()
                         .map(orderOutboxDataAccessMapper::orderOutboxEntityToOrderOutboxMessage)
-                        .toList()
+                        .collect(Collectors.toList())
         );
     }
 

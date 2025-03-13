@@ -11,6 +11,7 @@ import com.food.ordering.system.order.service.domain.outbox.model.payment.OrderP
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMessagingDataMapper {
@@ -63,7 +64,7 @@ public class OrderMessagingDataMapper {
                                 .setId(orderApprovalEventProduct.getId())
                                 .setQuantity(orderApprovalEventProduct.getQuantity())
                                 .build()
-                        ).toList()
+                        ).collect(Collectors.toList())
                 )
                 .setPrice(orderApprovalEventPayload.getPrice())
                 .setCreatedAt(orderApprovalEventPayload.getCreatedAt().toInstant())
