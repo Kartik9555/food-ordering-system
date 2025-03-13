@@ -4,12 +4,14 @@ CREATE SCHEMA customer;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+DROP TABLE IF EXISTS "customer".customers CASCADE;
+
 CREATE TABLE customer.customers
 (
     id uuid NOT NULL,
     username character varying COLLATE pg_catalog."default" NOT NULL,
-    first_name character varying COLLATE pg_catalog."default" NOT NULL,
-    last_name character varying COLLATE pg_catalog."default" NOT NULL,
+    firstname character varying COLLATE pg_catalog."default" NOT NULL,
+    lastname character varying COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT customers_pkey PRIMARY KEY (id)
 );
 
@@ -20,8 +22,8 @@ TABLESPACE pg_default
 AS
  SELECT id,
     username,
-    first_name,
-    last_name
+    firstname,
+    lastname
    FROM customer.customers
 WITH DATA;
 

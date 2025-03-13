@@ -74,8 +74,8 @@ DROP TABLE IF EXISTS "order".payment_outbox;
 CREATE TABLE "order".payment_outbox(
     id uuid NOT NULL,
     saga_id uuid NOT NULL,
-    created_at TIMESTAMP WITH TIMEZONE NOT NULL,
-    processed_at TIMESTAMP WITH TIMEZONE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
     type character varying COLLATE pg_catalog."default" NOT NULL,
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
@@ -93,8 +93,8 @@ DROP TABLE IF EXISTS "order".restaurant_approval_outbox;
 CREATE TABLE "order".restaurant_approval_outbox(
     id uuid NOT NULL,
     saga_id uuid NOT NULL,
-    created_at TIMESTAMP WITH TIMEZONE NOT NULL,
-    processed_at TIMESTAMP WITH TIMEZONE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    processed_at TIMESTAMP WITH TIME ZONE,
     type character varying COLLATE pg_catalog."default" NOT NULL,
     payload jsonb NOT NULL,
     outbox_status outbox_status NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE "order".customers
 (
     id uuid NOT NULL,
     username character varying COLLATE pg_catalog."default" NOT NULL,
-    first_name character varying COLLATE pg_catalog."default" NOT NULL,
-    last_name character varying COLLATE pg_catalog."default" NOT NULL,
+    firstname character varying COLLATE pg_catalog."default" NOT NULL,
+    lastname character varying COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT customers_pkey PRIMARY KEY (id)
 );
