@@ -25,7 +25,7 @@ public class OrderOutboxScheduler implements OutboxScheduler {
 
     @Override
     @Transactional
-    @Scheduled(fixedDelayString = "${restaurant-service.outbox-scheduler-fixed-rate}",
+    @Scheduled(fixedRateString = "${restaurant-service.outbox-scheduler-fixed-rate}",
             initialDelayString = "${restaurant-service.outbox-scheduler-initial-delay}")
     public void processOutboxMessage() {
         Optional<List<OrderOutboxMessage>> outboxMessageResponse = orderOutboxHelper.getOrderOutboxMessageByOutboxStatus(OutboxStatus.STARTED);
