@@ -41,4 +41,7 @@ build/
 ### infrasture docker volumes
 /infrastructure/docker-compose/volumes/
 /infrastructure/kafka/kafka-model/src/main/java/com/food/ordering/system/kafka/
+/infrastructure/kafka/kafka-model/src/main/java/debezium/
+/infrastructure/kafka/kafka-model/src/main/java/event/
+/infrastructure/kafka/kafka-model/src/main/java/io/debezium/connector/postgresql/
 /.idea/inspectionProfiles/Project_Default.xml
