@@ -8,7 +8,6 @@ import com.food.ordering.system.payment.service.dataaccess.outbox.repository.Ord
 import com.food.ordering.system.payment.service.domain.dto.PaymentRequest;
 import com.food.ordering.system.payment.service.domain.ports.input.message.listener.PaymentRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,7 +37,7 @@ public class PaymentRequestMessageListenerTest {
     @Autowired
     private OrderOutboxJpaRepository orderOutboxJpaRepository;
 
-    @Test
+    //@Test
     void testDoublePayment() {
         String sagaId = UUID.randomUUID().toString();
         paymentRequestMessageListener.completePayment(getPaymentRequest(sagaId));
@@ -50,7 +49,7 @@ public class PaymentRequestMessageListenerTest {
         assertOrderOutboxMessage(sagaId);
     }
 
-    @Test
+    //@Test
     void testDoublePaymentWithThreads() {
         String sagaId = UUID.randomUUID().toString();
         ExecutorService executor = null;

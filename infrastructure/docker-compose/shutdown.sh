@@ -33,4 +33,7 @@ yes | rm -r ./volumes/kafka/*
 # shellcheck disable=SC2216
 yes | rm -r ./volumes/zookeeper/*
 
+# shellcheck disable=SC2216
+yes | rm -r ./volumes/postgres/*
+
 echo "Shutdown services"

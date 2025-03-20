@@ -2,10 +2,10 @@ package com.food.ordering.system.restaurant.service.domain.outbox.scheduler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.food.ordering.system.domain.event.payload.RestaurantOrderEventPayload;
 import com.food.ordering.system.domain.valueobject.OrderApprovalStatus;
 import com.food.ordering.system.outbox.OutboxStatus;
 import com.food.ordering.system.resatuarant.service.domain.exception.RestaurantDomainException;
-import com.food.ordering.system.restaurant.service.domain.outbox.model.OrderEventPayload;
 import com.food.ordering.system.restaurant.service.domain.outbox.model.OrderOutboxMessage;
 import com.food.ordering.system.restaurant.service.domain.ports.output.repository.OrderOutboxRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +56,7 @@ public class OrderOutboxHelper {
     }
 
     @Transactional
-    public void saveOrderOutboxMessage(OrderEventPayload orderEventPayload,
+    public void saveOrderOutboxMessage(RestaurantOrderEventPayload orderEventPayload,
                                        OrderApprovalStatus approvalStatus,
                                        OutboxStatus outboxStatus,
                                        UUID sagaId) {
@@ -80,7 +80,7 @@ public class OrderOutboxHelper {
         log.info("Order outbox table status is updated as: {}", outboxStatus.name());
     }
 
-    private String createPayload(OrderEventPayload orderEventPayload) {
+    private String createPayload(RestaurantOrderEventPayload orderEventPayload) {
         try {
             return objectMapper.writeValueAsString(orderEventPayload);
         } catch (JsonProcessingException e) {

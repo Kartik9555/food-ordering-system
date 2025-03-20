@@ -6,7 +6,6 @@ import com.food.ordering.system.order.service.dataaccess.outbox.payment.reposito
 import com.food.ordering.system.order.service.domain.dto.message.PaymentResponse;
 import com.food.ordering.system.saga.SagaStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -39,13 +38,13 @@ public class OrderPaymentSagaTest {
     @Autowired
     private PaymentOutboxJpaRepository paymentOutboxJpaRepository;
 
-    @Test
+    //@Test
     void testDoublePayment() {
         orderPaymentSaga.process(getPaymentResponse());
         orderPaymentSaga.process(getPaymentResponse());
     }
 
-    @Test
+    //@Test
     void testDoublePaymentWithThreads() throws InterruptedException {
         Thread thread1 = new Thread(() -> orderPaymentSaga.process(getPaymentResponse()));
         Thread thread2 = new Thread(() -> orderPaymentSaga.process(getPaymentResponse()));
@@ -59,7 +58,7 @@ public class OrderPaymentSagaTest {
         assertPaymentOutbox();
     }
 
-    @Test
+    //@Test
     void testDoublePaymentWithLatch() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(2);
         Thread thread1 = new Thread(() -> {

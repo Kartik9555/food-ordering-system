@@ -1,25 +1,29 @@
-package com.food.ordering.system.restaurant.service.domain.outbox.model;
+package com.food.ordering.system.domain.event.payload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderEventPayload {
+public class OrderPaymentEventPayload {
+    @JsonProperty
+    private String id;
+    @JsonProperty
+    private String sagaId;
     @JsonProperty
     private String orderId;
     @JsonProperty
-    private String restaurantId;
+    private String customerId;
     @JsonProperty
-    private String orderApprovalStatus;
+    private BigDecimal price;
     @JsonProperty
     private ZonedDateTime createdAt;
     @JsonProperty
-    private List<String> failureMessages;
+    private String paymentOrderStatus;
 }
