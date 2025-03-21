@@ -32,7 +32,7 @@ CREATE TABLE "order".order_items
     price numeric(10,2) NOT NULL,
     quantity integer NOT NULL,
     sub_total numeric(10,2) NOT NULL,
-    CONSTRAINT order_items_pkey PRIMARY KEY (id)
+    CONSTRAINT order_items_pkey PRIMARY KEY (id, order_id)
 );
 
 ALTER TABLE "order".order_items
