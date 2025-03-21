@@ -5,7 +5,7 @@ services:
     image: quay.io/debezium/example-postgres
     container_name: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     command:
       - "postgres"
       - "-c"

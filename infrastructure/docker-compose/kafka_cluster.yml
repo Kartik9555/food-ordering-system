@@ -73,7 +73,7 @@ services:
     platform: linux/amd64
     image: debezium/connect:${DEBEZIUM_VERSION}
     ports:
-      - 8083:8083
+      - "8083:8083"
     environment:
       GROUP_ID: 1
       CONFIG_STORAGE_TOPIC: "connect-config"
