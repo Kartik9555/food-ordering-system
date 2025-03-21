@@ -3,6 +3,7 @@ package com.food.ordering.system.payment.service.dataaccess.creditentry.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,6 +22,8 @@ public class CreditEntryEntity {
     private UUID id;
     private UUID customerId;
     private BigDecimal totalCreditAmount;
+    @Version
+    private int version;
 
     @Override
     public boolean equals(Object o) {
